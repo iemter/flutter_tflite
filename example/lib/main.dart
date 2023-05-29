@@ -40,12 +40,13 @@ class _MyAppState extends State<MyApp> {
   bool _busy = false;
 
   Future predictImagePicker() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
     setState(() {
       _busy = true;
     });
-    predictImage(image);
+    var imageFile = File(image.path);
+    predictImage(imageFile);
   }
 
   Future predictImage(File image) async {
@@ -150,9 +151,9 @@ class _MyAppState extends State<MyApp> {
     for (var i = 0; i < inputSize; i++) {
       for (var j = 0; j < inputSize; j++) {
         var pixel = image.getPixel(j, i);
-        buffer[pixelIndex++] = (img.getRed(pixel) - mean) / std;
-        buffer[pixelIndex++] = (img.getGreen(pixel) - mean) / std;
-        buffer[pixelIndex++] = (img.getBlue(pixel) - mean) / std;
+        buffer[pixelIndex++] = (pixel.r - mean) / std;
+        buffer[pixelIndex++] = (pixel.g - mean) / std;
+        buffer[pixelIndex++] = (pixel.b - mean) / std;
       }
     }
     return convertedBytes.buffer.asUint8List();
@@ -165,9 +166,9 @@ class _MyAppState extends State<MyApp> {
     for (var i = 0; i < inputSize; i++) {
       for (var j = 0; j < inputSize; j++) {
         var pixel = image.getPixel(j, i);
-        buffer[pixelIndex++] = img.getRed(pixel);
-        buffer[pixelIndex++] = img.getGreen(pixel);
-        buffer[pixelIndex++] = img.getBlue(pixel);
+        buffer[pixelIndex++] = pixel.r;
+        buffer[pixelIndex++] = pixel.g;
+        buffer[pixelIndex++] = pixel.b;
       }
     }
     return convertedBytes.buffer.asUint8List();
