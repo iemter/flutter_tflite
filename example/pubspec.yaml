@@ -28,7 +28,7 @@ dev_dependencies:
   
   image: ^4.0.17
 
-  tflite:
+  flutter_tflite:
     path: ../
 
   test: ^1.12.0

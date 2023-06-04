@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tflite/tflite.dart';
+import 'package:flutter_tflite/flutter_tflite.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
