@@ -259,7 +259,7 @@ public class TflitePlugin implements FlutterPlugin, MethodCallHandler, ActivityA
   }
 
   private boolean isInterpreterBusy() {
-    return isBusy;
+    return getTfLiteBusy();
   }
 
   private String loadModel(HashMap args) throws IOException {
