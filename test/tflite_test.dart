@@ -44,6 +44,19 @@ void main() {
     );
   });
 
+  test('isInterpreterBusy', () async {
+    await Tflite.isInterpreterBusy();
+    expect(
+      log,
+      <Matcher>[
+        isMethodCall(
+          'isInterpreterBusy',
+          arguments: null,
+        ),
+      ],
+    );
+  });
+
   test('runModelOnImage', () async {
     await Tflite.runModelOnImage(
       path: '/image/path',

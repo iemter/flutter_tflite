@@ -92,6 +92,11 @@ public class TflitePlugin implements FlutterPlugin, MethodCallHandler, ActivityA
           {"rightKnee", "rightAnkle"}
   };
 
+  // getter method to see if interpreter is busy
+  public boolean getTfLiteBusy() {
+      return tfLiteBusy;
+  }
+
   Map<String, Integer> partsIds = new HashMap<>();
   List<Integer> parentToChildEdges = new ArrayList<>();
   List<Integer> childToParentEdges = new ArrayList<>();
@@ -240,9 +245,21 @@ public class TflitePlugin implements FlutterPlugin, MethodCallHandler, ActivityA
       } catch (Exception e) {
         result.error("Failed to run model", e.getMessage(), e);
       }
-    } else {
+    }
+    else if (call.method.equals("isInterpreterBusy")) {
+      try {
+        isInterpreterBusy();
+      } catch (Exception e) {
+        result.error("Failed to check if busy", e.getMessage(), e);
+      }
+    }
+      else {
       result.error("Invalid method", call.method.toString(), "");
     }
+  }
+
+  private boolean isInterpreterBusy() {
+    return isBusy;
   }
 
   private String loadModel(HashMap args) throws IOException {

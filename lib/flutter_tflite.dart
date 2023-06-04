@@ -412,4 +412,9 @@ class Tflite {
       },
     );
   }
+
+  static isInterpreterBusy() async {
+    return await _channel.invokeMethod('isInterpreterBusy');
+  }
+
 }
